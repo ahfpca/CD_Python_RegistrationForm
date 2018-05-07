@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        .error {
+            color: red;
+        }
+
+        .message {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+    <title>Registration Form</title>
+</head>
+<body>
+    <br>
+    <br>
+    <form action="/register" method="post">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 card">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <p class="{{ category }}">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% if successMsg|length > 0 %}
+                    <p class="message">{{ successMsg }}</p>
+                {% endif %}
+                <br>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <label class="col-5" for="email"><span class="red">*</span> Email</label>
+                    <input class="col-5" type="text" name="email" id="email" placeholder="" value="{{ session["email"] }}">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <label class="col-5" for="firstname"><span class="red">*</span> First Name:</label>
+                    <input class="col-5" type="text" name="firstname" id="firstname" placeholder="" value="{{ session["firstname"] }}">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <label class="col-5" for="lastname"><span class="red">*</span> Last Name:</label>
+                    <input class="col-5" type="text" name="lastname" id="lastname" placeholder="" value="{{ session["lastname"] }}">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <label class="col-5" for="password"><span class="red">*</span> Password:</label>
+                    <input class="col-5" type="password" name="password" id="password" placeholder="" value="">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <label class="col-5" for="passconfirm"><span class="red">*</span> Password Confirm:</label>
+                    <input class="col-5" type="password" name="passconfirm" id="passconfirm" placeholder="" value="">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <label class="col-5" for="birthdate"><span class="red">*</span> Birthdate:</label>
+                    <input class="col-5" type="text" name="birthdate" id="birthdate" placeholder="mm/dd/yyyy" value="{{ session["birthdate"] }}">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-8"></div>
+                    <button class="col-3" type="submit">Submit</button>
+                </div>
+                <br>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
